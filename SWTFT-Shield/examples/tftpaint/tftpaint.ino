@@ -106,8 +106,13 @@ void loop()
       tft.fillRect(0, BOXSIZE, tft.width(), tft.height()-BOXSIZE, BLACK);
     }
     // scale from 0->1023 to tft.width
-    p.x = tft.width()-(map(p.x, TS_MINX, TS_MAXX, tft.width(), 0));
-    p.y = tft.height()-(map(p.y, TS_MINY, TS_MAXY, tft.height(), 0));
+    //p.x = tft.width()-(map(p.x, TS_MINX, TS_MAXX, tft.width(), 0));
+    //p.y = tft.height()-(map(p.y, TS_MINY, TS_MAXY, tft.height(), 0));
+    p.x = map(p.x, TS_MINX, TS_MAXX, 0, tft.height());
+    p.y = map(p.y, TS_MINY, TS_MAXY, 0, tft.width());
+    int16_t tmp = p.x;
+    p.x = tft.width() - p.y;
+    p.y = tft.height() - tmp;    
     /*
     Serial.print("("); Serial.print(p.x);
     Serial.print(", "); Serial.print(p.y);
